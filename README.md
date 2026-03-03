@@ -18,6 +18,8 @@ Compared to the original chan_dongle, chan_svistok includes the following enhanc
 | Device limits | No | Per-device call/balance limits |
 | Balance tracking | Manual | Automatic with ballast support |
 | Group management | Basic | IMSI-based group assignment |
+| Device binding | By IMSI only | AT^SN serial number binding |
+| IMEI management | Static | Change IMEI on the fly via CLI |
 | Documentation | Minimal | Full SDD flows + ADRs |
 | Call statistics | Basic | Extended with ACD calculation |
 | Error handling | Standard | Enhanced with persistence |
