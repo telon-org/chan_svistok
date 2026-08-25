@@ -20,10 +20,30 @@ Compared to the original chan_dongle, chan_svistok includes the following enhanc
 | Group management | Basic | IMSI-based group assignment |
 | Device binding | By IMSI only | AT^SN serial number binding |
 | IMEI management | Static | Change IMEI on the fly via CLI |
+| **Modem stability** | Basic reconnect | Enhanced disconnect detection & recovery |
+| **Restart mechanism** | Simple restart | Graceful/convenient restart with state machine |
 | Documentation | Minimal | Full SDD flows + ADRs |
 | Call statistics | Basic | Extended with ACD calculation |
 | Error handling | Standard | Enhanced with persistence |
 | Logging | Standard | Extended with per-device logs |
+
+#### Modem Stability Improvements
+
+**Fixed modem disconnections:**
+- Enhanced `port_status()` detection for USB device availability
+- Automatic device state recovery on communication failure
+- Improved monitor thread restart on device reconnect
+- Better handling of device disappearance (USB unplug)
+
+** Redesigned restart mechanism:**
+- **3-stage restart states**: `stop` → `restart` → `remove` → `start`
+- **Graceful restart options**:
+  - `restart now` - Immediate restart
+  - `restart gracefully` - Wait for active calls to complete
+  - `restart when convenient` - Wait until no active channels
+- **State machine**: `desired_state` vs `current_state` tracking
+- **Automatic cleanup**: Proper resource release before restart
+- **Config-triggered restart**: Auto-restart on critical config changes (TTY, IMEI, IMSI)
 
 ### Original Project
 
